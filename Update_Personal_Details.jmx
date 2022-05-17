@@ -1,0 +1,834 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.4.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="UCL_Update_Employee_Details" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.tearDown_on_shutdown">true</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">true</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="abs_dir_path" elementType="Argument">
+            <stringProp name="Argument.name">abs_dir_path</stringProp>
+            <stringProp name="Argument.value">D:/apache-jmeter-5.4.3/csv</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="auth_dir_rel_path" elementType="Argument">
+            <stringProp name="Argument.name">auth_dir_rel_path</stringProp>
+            <stringProp name="Argument.value">/authDetails/</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="user_creds_csv" elementType="Argument">
+            <stringProp name="Argument.name">user_creds_csv</stringProp>
+            <stringProp name="Argument.value">user_login_parms.csv</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="user_tokens_csv_path" elementType="Argument">
+            <stringProp name="Argument.name">user_tokens_csv_path</stringProp>
+            <stringProp name="Argument.value">user_tokens.csv</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="sso_user_login_page_time" elementType="Argument">
+            <stringProp name="Argument.name">sso_user_login_page_time</stringProp>
+            <stringProp name="Argument.value">60000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="sso_ucl_redirect_login_time" elementType="Argument">
+            <stringProp name="Argument.name">sso_ucl_redirect_login_time</stringProp>
+            <stringProp name="Argument.value">120000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="sso_user_pwd_page_time" elementType="Argument">
+            <stringProp name="Argument.name">sso_user_pwd_page_time</stringProp>
+            <stringProp name="Argument.value">10000</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="application_url" elementType="Argument">
+            <stringProp name="Argument.name">application_url</stringProp>
+            <stringProp name="Argument.value">https://app-dev.ucl.ac.uk/InsideUCL/authtesting</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="employee_uri" elementType="Argument">
+            <stringProp name="Argument.name">employee_uri</stringProp>
+            <stringProp name="Argument.value">GetLookupData</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="server" elementType="Argument">
+            <stringProp name="Argument.name">server</stringProp>
+            <stringProp name="Argument.value">ebscorets-dev.adcom.ucl.ac.uk:4448/webservices/rest/UclHRSSPersonApi</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="update_emp_det_rel_path" elementType="Argument">
+            <stringProp name="Argument.name">update_emp_det_rel_path</stringProp>
+            <stringProp name="Argument.value">/updateEmpDetails/</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="abs_result_path" elementType="Argument">
+            <stringProp name="Argument.name">abs_result_path</stringProp>
+            <stringProp name="Argument.value">D:\\apache-jmeter-5.4.3\\Results\\UpdateEmpDetails\\</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+          <elementProp name="update_emp_details_csv" elementType="Argument">
+            <stringProp name="Argument.name">update_emp_details_csv</stringProp>
+            <stringProp name="Argument.value">employee_update_params.csv</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="UserTokens_Dynamic_Fetch" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler- load CSV to get Line Count" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.text.*;
+import java.io.*;
+import java.util.*;
+
+String temp = null;
+
+ArrayList lines = new ArrayList();
+
+BufferedReader bufRdr;
+
+ArrayList strList = new ArrayList();     
+
+// get the file
+try {
+	filePath = vars.get(&quot;abs_dir_path&quot;)+vars.get(&quot;auth_dir_rel_path&quot;)+vars.get(&quot;user_creds_csv&quot;);
+	log.info(&quot;FilePath::&quot;+filePath);
+
+	File file = new File(filePath);
+     if (!file.exists()) {
+        throw new Exception (&quot;ERROR: file -&gt; &quot; + file + &quot;&lt;- not found. Not able to load User Tokens&quot;);
+    }
+
+    bufRdr = new BufferedReader(new InputStreamReader(new FileInputStream(file), &quot;UTF8&quot;));
+   
+} catch(Exception e){
+    log.error(&quot;failed to load file&quot;);
+    log.error(e.getMessage());
+    return;
+}
+
+// For each CSV line, save it to a variable
+int counter = 0; int cnt =0;
+while(true){
+    try{
+        temp = bufRdr.readLine();     
+	 if(temp == null || temp.equals(&quot;&lt;EOF&gt;&quot;)){
+            break;
+         }
+
+         cnt = temp.length()-1;     
+         lines.add(temp.substring(0,cnt));
+  //       vars.put(&quot;csv_line_&quot; + String.valueOf(counter), temp);
+        counter++;
+           
+
+    } catch(Exception e){
+        log.error(&quot;failed to get next line&quot;);
+        log.error(e.getMessage());
+        break;
+    }
+}
+bufRdr.close();
+log.info(&quot;USER-TOKEN(S)::&quot;+lines);
+
+// store the number of CSV lines and data are for the loop counter
+vars.put(&quot;linesCount&quot;, String.valueOf(lines.size()));
+
+log.info(&quot;linesCount:&quot;+vars.get(&quot;linesCount&quot;));
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Getting Different User Tokens" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${linesCount}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config" enabled="true">
+            <stringProp name="delimiter">,</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="filename">${abs_dir_path}${auth_dir_rel_path}${user_creds_csv}</stringProp>
+            <boolProp name="ignoreFirstLine">false</boolProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+            <boolProp name="stopThread">true</boolProp>
+            <stringProp name="variableNames">username,password</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig guiclass="com.googlecode.jmeter.plugins.webdriver.config.gui.ChromeDriverConfigGui" testclass="com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig" testname="jp@gc - Chrome Driver Config" enabled="true">
+            <stringProp name="WebDriverConfig.proxy_type">SYSTEM</stringProp>
+            <stringProp name="WebDriverConfig.proxy_pac_url"></stringProp>
+            <stringProp name="WebDriverConfig.http_host"></stringProp>
+            <intProp name="WebDriverConfig.http_port">8080</intProp>
+            <boolProp name="WebDriverConfig.use_http_for_all_protocols">true</boolProp>
+            <stringProp name="WebDriverConfig.https_host"></stringProp>
+            <intProp name="WebDriverConfig.https_port">8080</intProp>
+            <stringProp name="WebDriverConfig.ftp_host"></stringProp>
+            <intProp name="WebDriverConfig.ftp_port">8080</intProp>
+            <stringProp name="WebDriverConfig.socks_host"></stringProp>
+            <intProp name="WebDriverConfig.socks_port">8080</intProp>
+            <stringProp name="WebDriverConfig.no_proxy">localhost</stringProp>
+            <boolProp name="WebDriverConfig.maximize_browser">false</boolProp>
+            <boolProp name="WebDriverConfig.reset_per_iteration">true</boolProp>
+            <boolProp name="WebDriverConfig.dev_mode">false</boolProp>
+            <stringProp name="ChromeDriverConfig.chromedriver_path">D:\chromedriver_win32\chromedriver.exe</stringProp>
+            <boolProp name="ChromeDriverConfig.android_enabled">false</boolProp>
+            <boolProp name="ChromeDriverConfig.headless_enabled">false</boolProp>
+            <boolProp name="ChromeDriverConfig.insecurecerts_enabled">false</boolProp>
+            <boolProp name="ChromeDriverConfig.incognito_enabled">false</boolProp>
+            <boolProp name="ChromeDriverConfig.no_sandbox_enabled">false</boolProp>
+          </com.googlecode.jmeter.plugins.webdriver.config.ChromeDriverConfig>
+          <hashTree/>
+          <com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler guiclass="com.googlecode.jmeter.plugins.webdriver.sampler.gui.WebDriverSamplerGui" testclass="com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler" testname="Getting User Tokens" enabled="true">
+            <stringProp name="WebDriverSampler.script">var pkg = JavaImporter(org.openqa.selenium);
+var IoPkg = JavaImporter(java.io);
+var vars = org.apache.jmeter.threads.JMeterContextService.getContext().getVariables();
+WDS.sampleResult.sampleStart();
+
+var application_url = vars.get(&quot;application_url&quot;);
+WDS.log.info(&apos;################################################################################&apos;);
+WDS.log.info(&quot;Application is launching with URL:&quot;+application_url);
+WDS.browser.get(application_url);//this should add to config file
+
+
+WDS.log.info(&apos;################################################################################&apos;);
+WDS.log.info(&apos;Application is waiting for OAuth2 to complete and Redirect to Microsoft&apos;);
+
+WDS.log.info(&apos;USER:&apos;+WDS.args[0]);
+WDS.log.info(&apos;Pa$w0rd:&apos;+WDS.args[1]);
+
+var start = new Date().getTime()
+var attempt = 1
+while (new Date().getTime() - start &lt; vars.get(&quot;sso_user_login_page_time&quot;)) {
+    try {
+        var logout = WDS.browser.findElement(pkg.By.id(&apos;i0116&apos;));
+        WDS.log.info(&apos;Username Element found&apos;);
+        break
+    }
+    catch (err) {
+        WDS.log.info(&apos;Attempt # &apos; + attempt + &apos;, username Element not found&apos;)
+        java.lang.Thread.sleep(1000)
+        attempt++
+    }
+}
+WDS.browser.findElement(pkg.By.id(&apos;i0116&apos;)).sendKeys(WDS.args[0]);
+WDS.browser.findElement(pkg.By.id(&apos;idSIButton9&apos;)).click();
+
+WDS.log.info(&apos;Waiting for password field to load&apos;)
+/*var start2 = new Date().getTime()
+var attempt2 = 1
+while (new Date().getTime() - start2 &lt; vars.get(&quot;sso_user_pwd_page_time&quot;)) {
+    try {
+        var logout = WDS.browser.findElement(pkg.By.id(&apos;i0118&apos;));
+        WDS.log.info(&apos;Password Element found&apos;);
+        break
+    }
+    catch (err) {
+        WDS.log.info(&apos;Attempt # &apos; + attempt2 + &apos;, Password Element not found&apos;)
+        java.lang.Thread.sleep(1000)
+        attempt2++
+    }
+}*/
+java.lang.Thread.sleep(3000);
+WDS.browser.findElement(pkg.By.id(&apos;i0118&apos;)).sendKeys(WDS.args[1]);
+WDS.browser.findElement(pkg.By.id(&apos;idSIButton9&apos;)).click();
+
+WDS.log.info(&apos;Waiting for SIGN-IN field to load&apos;)
+java.lang.Thread.sleep(2000);
+WDS.browser.findElement(pkg.By.id(&apos;idSIButton9&apos;)).click();
+
+WDS.log.info(&apos;Waiting for Authentication to Complete and redirect to UCL Page to Load...!&apos;)
+var start1 = new Date().getTime()
+var attempt1 = 1
+while (new Date().getTime() - start1 &lt; vars.get(&quot;sso_ucl_redirect_login_time&quot;)) {
+    try {
+        var logout = WDS.browser.findElement(pkg.By.xpath(&quot;//*[@id=\&quot;b1-Content\&quot;]/div[1]/button&quot;));
+        WDS.log.info(&apos;Generate Token Element found&apos;);
+        break
+    }
+    catch (err) {
+        WDS.log.info(&apos;Attempt # &apos; + attempt1 + &apos;, Generate Token Element not found&apos;)
+        java.lang.Thread.sleep(1000)
+        attempt1++
+    }
+}
+WDS.browser.findElement(pkg.By.xpath(&quot;//*[@id=\&quot;b1-Content\&quot;]/div[1]/button&quot;)).click(); // Azure Token
+WDS.browser.findElement(pkg.By.xpath(&quot;//*[@id=\&quot;b1-Content\&quot;]/div[5]/button&quot;)).click(); // WSo2 Token
+
+WDS.log.info(&apos;Fethching Tokens...!&apos;)
+java.lang.Thread.sleep(2000) 
+var azure_token = WDS.browser.findElement(pkg.By.xpath(&quot;//*[@id=\&quot;b1-Content\&quot;]/div[2]/span&quot;));
+var ws02_token = WDS.browser.findElement(pkg.By.xpath(&quot;//*[@id=\&quot;b1-Content\&quot;]/div[6]/span&quot;));
+
+WDS.log.info(&apos;################################################################################&apos;);
+WDS.log.info(&apos;Printing Tokens...!&apos;)
+var azure_full_token = &apos;Bearer &apos;+azure_token.getText();
+var ws02_full_token = ws02_token.getText();
+WDS.log.info(&apos;AZURE Token=&apos;+azure_full_token);
+WDS.log.info(&apos;WS02 Token=&apos;+ws02_full_token);
+
+var vars = org.apache.jmeter.threads.JMeterContextService.getContext().getVariables();
+vars.put(&apos;AZURE_TOKEN&apos;,azure_full_token);
+vars.put(&apos;WS02_TOKEN&apos;,ws02_full_token);
+WDS.log.info(&quot;############################################################################&quot;);
+azure_token =vars.get(&quot;AZURE_TOKEN&quot;);
+
+var ws02_token = vars.get(&quot;WS02_TOKEN&quot;);
+var cnt_type = &quot;application/json&quot;;
+var com_seperator = &quot;,&quot;;
+
+var temp = WDS.args[0];
+var user_name = temp.substring(0,temp.indexOf(&quot;@&quot;));
+WDS.log.info(&quot;username for applying leave:&quot;+user_name);
+var tokens = ws02_token + com_seperator + azure_token + com_seperator + cnt_type + com_seperator + user_name;
+WDS.log.info(&quot;############################################################################&quot;);
+var user_token_path = vars.get(&quot;abs_dir_path&quot;)+vars.get(&quot;auth_dir_rel_path&quot;)+vars.get(&quot;user_tokens_csv_path&quot;);
+WDS.log.info(&quot;PATH-USER-TOKENS-FILE:&quot;+user_token_path);
+f = new IoPkg.FileOutputStream(user_token_path,true);
+p = new IoPkg.PrintStream(f);
+if(tokens.contains(&quot;Bearer&quot;)){
+	p.print(tokens);
+	p.print(&quot;\n&quot;);
+	WDS.log.info(&quot;User Tokens FILEDATA-CSV:&quot;+tokens);
+	WDS.log.info(&quot;############################################################################&quot;);
+     WDS.log.info(&quot;User Tokens Written to FIle...!&quot;);
+}
+
+else
+{
+	WDS.log.info(&quot;No Tokens to write to File for User-Name:&quot;+user_name);
+}
+p.close();
+f.close();
+WDS.sampleResult.sampleEnd();
+//WDS.browser.close();</stringProp>
+            <stringProp name="WebDriverSampler.parameters">${username} ${password}</stringProp>
+            <stringProp name="WebDriverSampler.language">javascript</stringProp>
+          </com.googlecode.jmeter.plugins.webdriver.sampler.WebDriverSampler>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="49586">200</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message"></stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">true</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Update_Employee_Details" enabled="false">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+      </ThreadGroup>
+      <hashTree>
+        <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+          <collectionProp name="Arguments.arguments">
+            <elementProp name="linecount" elementType="Argument">
+              <stringProp name="Argument.name">linecount</stringProp>
+              <stringProp name="Argument.value">${linesCount}</stringProp>
+              <stringProp name="Argument.metadata">=</stringProp>
+            </elementProp>
+          </collectionProp>
+        </Arguments>
+        <hashTree/>
+        <BeanShellSampler guiclass="BeanShellSamplerGui" testclass="BeanShellSampler" testname="BeanShell Sampler- load CSV to get Update  employee  count" enabled="true">
+          <stringProp name="BeanShellSampler.query">import java.text.*;
+import java.io.*;
+import java.util.*;
+
+String temp = null;
+
+ArrayList lines = new ArrayList();
+
+BufferedReader bufRdr;
+
+ArrayList strList = new ArrayList();     
+
+// get the file
+try {
+	filePath = vars.get(&quot;abs_dir_path&quot;)+vars.get(&quot;update_emp_det_rel_path&quot;)+vars.get(&quot;update_emp_details_csv&quot;);
+	log.info(&quot;FilePath::&quot;+filePath);
+
+	File file = new File(filePath);
+     if (!file.exists()) {
+        throw new Exception (&quot;ERROR: file -&gt; &quot; + file + &quot;&lt;- not found: NOT able to load Update Employee Params&quot;);
+    }
+
+    bufRdr = new BufferedReader(new InputStreamReader(new FileInputStream(file), &quot;UTF8&quot;));
+   
+} catch(Exception e){
+    log.error(&quot;failed to load file&quot;);
+    log.error(e.getMessage());
+    return;
+}
+
+// For each CSV line, save it to a variable
+int counter = 0; int cnt =0;
+while(true){
+    try{
+        temp = bufRdr.readLine();     
+	 if(temp == null || temp.equals(&quot;&lt;EOF&gt;&quot;)){
+            break;
+         }
+
+         cnt = temp.length()-1;     
+         lines.add(temp.substring(0,cnt));
+  //       vars.put(&quot;csv_line_&quot; + String.valueOf(counter), temp);
+        counter++;
+           
+
+    } catch(Exception e){
+        log.error(&quot;failed to get next line&quot;);
+        log.error(e.getMessage());
+        break;
+    }
+}
+bufRdr.close();
+log.info(&quot;UPDATE-EMPLOYEE-PARAMS::&quot;+lines);
+
+// store the number of CSV lines and data are for the loop counter
+vars.put(&quot;linesCount&quot;, String.valueOf(lines.size()));
+
+log.info(&quot;linesCount:&quot;+vars.get(&quot;linesCount&quot;));
+</stringProp>
+          <stringProp name="BeanShellSampler.filename"></stringProp>
+          <stringProp name="BeanShellSampler.parameters"></stringProp>
+          <boolProp name="BeanShellSampler.resetInterpreter">false</boolProp>
+        </BeanShellSampler>
+        <hashTree/>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Tokens for User" enabled="true">
+          <stringProp name="filename">${abs_dir_path}${auth_dir_rel_path}${user_tokens_csv_path}</stringProp>
+          <stringProp name="fileEncoding"></stringProp>
+          <stringProp name="variableNames">Authorization,auth-token,Content-Type,userName</stringProp>
+          <boolProp name="ignoreFirstLine">false</boolProp>
+          <stringProp name="delimiter">,</stringProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">true</boolProp>
+          <boolProp name="stopThread">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="Auth-Tokens for User" enabled="true">
+          <collectionProp name="HeaderManager.headers">
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Authorization</stringProp>
+              <stringProp name="Header.value">${Authorization}</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">auth-token</stringProp>
+              <stringProp name="Header.value">${auth-token}</stringProp>
+            </elementProp>
+            <elementProp name="" elementType="Header">
+              <stringProp name="Header.name">Content-Type</stringProp>
+              <stringProp name="Header.value">${Content-Type}</stringProp>
+            </elementProp>
+          </collectionProp>
+        </HeaderManager>
+        <hashTree/>
+        <LoopController guiclass="LoopControlPanel" testclass="LoopController" testname="Update Employee Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">true</boolProp>
+          <stringProp name="LoopController.loops">${linesCount}</stringProp>
+        </LoopController>
+        <hashTree>
+          <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Update Employee Details" enabled="true">
+            <stringProp name="filename">${abs_dir_path}${update_emp_det_rel_path}${update_emp_details_csv}</stringProp>
+            <stringProp name="fileEncoding"></stringProp>
+            <stringProp name="variableNames">UCL_USER_ID,preferred_forename,preferred_surname</stringProp>
+            <boolProp name="ignoreFirstLine">false</boolProp>
+            <stringProp name="delimiter">,</stringProp>
+            <boolProp name="quotedData">false</boolProp>
+            <boolProp name="recycle">true</boolProp>
+            <boolProp name="stopThread">false</boolProp>
+            <stringProp name="shareMode">shareMode.all</stringProp>
+          </CSVDataSet>
+          <hashTree/>
+          <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="Update Employee" enabled="true">
+            <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+            <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+              <collectionProp name="Arguments.arguments">
+                <elementProp name="" elementType="HTTPArgument">
+                  <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                  <stringProp name="Argument.value">{&#xd;
+  &quot;InputParameters&quot;: {&#xd;
+    &quot;P_UCL_USER_ID&quot;: &quot;${UCL_USER_ID}&quot;,&#xd;
+    &quot;P_PREFERRED_FORENAME&quot;: &quot;${preferred_forename}&quot;,&#xd;
+    &quot;P_PREFERRED_SURNAME&quot;: &quot;${preferred_surname}&quot;,&#xd;
+    &quot;P_ETHNIC_ORIGIN_CODE&quot;: &quot;&quot;,&#xd;
+    &quot;X_OBJECT_VERSION_NUMBER&quot;: 0&#xd;
+  }&#xd;
+ }</stringProp>
+                  <stringProp name="Argument.metadata">=</stringProp>
+                </elementProp>
+              </collectionProp>
+            </elementProp>
+            <stringProp name="HTTPSampler.domain">ebscorets-dev.adcom.ucl.ac.uk</stringProp>
+            <stringProp name="HTTPSampler.port">4448</stringProp>
+            <stringProp name="HTTPSampler.protocol">https</stringProp>
+            <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+            <stringProp name="HTTPSampler.path">webservices/rest/UclHRSSPersonApi/UpdatePersonalDetails</stringProp>
+            <stringProp name="HTTPSampler.method">POST</stringProp>
+            <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+            <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+            <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+            <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+            <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+            <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+            <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          </HTTPSamplerProxy>
+          <hashTree/>
+          <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+            <boolProp name="ResultCollector.error_logging">false</boolProp>
+            <objProp>
+              <name>saveConfig</name>
+              <value class="SampleSaveConfiguration">
+                <time>true</time>
+                <latency>true</latency>
+                <timestamp>true</timestamp>
+                <success>true</success>
+                <label>true</label>
+                <code>true</code>
+                <message>true</message>
+                <threadName>true</threadName>
+                <dataType>true</dataType>
+                <encoding>false</encoding>
+                <assertions>true</assertions>
+                <subresults>true</subresults>
+                <responseData>false</responseData>
+                <samplerData>false</samplerData>
+                <xml>false</xml>
+                <fieldNames>true</fieldNames>
+                <responseHeaders>false</responseHeaders>
+                <requestHeaders>false</requestHeaders>
+                <responseDataOnError>false</responseDataOnError>
+                <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+                <assertionsResultsToSave>0</assertionsResultsToSave>
+                <bytes>true</bytes>
+                <sentBytes>true</sentBytes>
+                <url>true</url>
+                <threadCounts>true</threadCounts>
+                <idleTime>true</idleTime>
+                <connectTime>true</connectTime>
+              </value>
+            </objProp>
+            <stringProp name="filename"></stringProp>
+          </ResultCollector>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Update Employee Details" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1446258828">201|409</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.custom_message">Update Employee Details Failed</stringProp>
+            <stringProp name="Assertion.test_field">Assertion.response_code</stringProp>
+            <boolProp name="Assertion.assume_success">true</boolProp>
+            <intProp name="Assertion.test_type">2</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <JSR223Listener guiclass="TestBeanGUI" testclass="JSR223Listener" testname="JSR223 Listener" enabled="true">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import org.apache.jmeter.assertions.AssertionResult;
+import java.text.SimpleDateFormat; 
+import java.util.Date;
+Date date = new Date(); 
+SimpleDateFormat df  = new SimpleDateFormat(&quot;MM_dd_yyyy_HH_mm_ss&quot;); 
+String formattedDate = df.format(date); 
+
+FileWriter fstream = new FileWriter(vars.get(&quot;abs_result_path&quot;)+&quot;Update_Employee_Details_&quot;+formattedDate+&quot;.txt&quot;,true); 
+BufferedWriter out = new BufferedWriter(fstream);
+
+if(prev.isSuccessful())
+{
+	log.info(&quot;UPDATE EMPLOYEE DETAILS SUCCESSFULLL&quot;);
+		prev.setResponseMessage(prev.getResponseDataAsString());
+		resp_code = prev.getResponseCode();
+		resp_message = resp_code + &quot;&lt;----&gt;&quot;+prev.getResponseDataAsString();
+		log.info(&quot;response-code:&quot;+prev.getResponseCode());
+		log.info(&quot;response-msg:&quot;+resp_message);
+		out.write(resp_message);//insert new line
+		out.write(System.getProperty(&quot;line.separator&quot;));//insert new line
+	
+} else {
+	log.info(&quot;UPDATE EMPLOYEE DETAILS NOT SUCCESSFULLL&quot;);
+	prev.setResponseMessage(prev.getResponseDataAsString());
+     log.info(&quot;response-code:&quot;+prev.getResponseCode());
+      AssertionResult[] assertionResults = prev.getAssertionResults();
+      for (AssertionResult assertionResult : assertionResults) {
+    if (assertionResult.isFailure()) {
+        log.info(&quot;assertion is not successful&quot;);
+        resp_code = prev.getResponseCode();
+      	resp_message = resp_code + &quot;&lt;----&gt;&quot;+prev.getResponseDataAsString();
+		log.info(&quot;response-code:&quot;+prev.getResponseCode());
+		log.info(&quot;response-msg:&quot;+resp_message);
+		out.write(resp_message);//insert new line
+		out.write(System.getProperty(&quot;line.separator&quot;));//insert new line
+        assertionResult.setFailureMessage(resp_message); // customise
+    } 
+}
+}
+out.close();
+fstream.close(); 
+</stringProp>
+            <stringProp name="scriptLanguage">java</stringProp>
+          </JSR223Listener>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>true</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">${abs_result_path}BasicAggregateResults_${__time(MM-dd-yyyy-HH-mm-ss,)}.csv</stringProp>
+        <boolProp name="useGroupName">true</boolProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SimpleDataWriter" testclass="ResultCollector" testname="Will log all Thread Group Results" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>true</responseHeaders>
+            <requestHeaders>true</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">${abs_result_path}FinalResult_${__time(MM-dd-yyyy-HH-mm-ss,)}.csv</stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="TableVisualizer" testclass="ResultCollector" testname="View Results in Table" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+      <ResultCollector guiclass="SummaryReport" testclass="ResultCollector" testname="Summary Report" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>true</message>
+            <threadName>true</threadName>
+            <dataType>true</dataType>
+            <encoding>false</encoding>
+            <assertions>true</assertions>
+            <subresults>true</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <sentBytes>true</sentBytes>
+            <url>true</url>
+            <threadCounts>true</threadCounts>
+            <idleTime>true</idleTime>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename">${abs_result_path}PaidSummaryResults_${__time(MM-dd-yyyy-HH-mm-ss,)}.csv</stringProp>
+        <boolProp name="useGroupName">true</boolProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
